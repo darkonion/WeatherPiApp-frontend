@@ -1,0 +1,86 @@
+<div class="container">
+
+  <div class="container my-5">
+
+
+    <!--Section: Content-->
+    <section class="p-5" style="border:1px solid #cecece;">
+
+      <h3 class="text-center font-weight-bold mb-5">Weather conditions</h3>
+
+      <div class="row d-flex justify-content-center">
+
+        <div class="col-md-6 col-lg-3 mb-4 text-center">
+          <h4 class="h1 font-weight-normal mb-3">
+            <i class="fas fa-thermometer-three-quarters mr-2 teal-text"></i>
+            <span class="d-inline-block count-up">{{measurement.temperature}}°C</span>
+          </h4>
+          <p class="font-weight-normal text-muted">Temperature</p>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4 text-center">
+          <h4 class="h1 font-weight-normal mb-3">
+            <i class="fas fa-arrow-down mr-2 teal-text"></i>
+            <span class="d-inline-block count1">{{measurement.pressure}}hPa</span>
+          </h4>
+          <p class="font-weight-normal text-muted">Pressure</p>
+        </div>
+
+        <div class="col-md-6 col-lg-3 mb-4 text-center">
+          <h4 class="h1 font-weight-normal mb-3">
+            <i class="fas fa-water mr-2 teal-text"></i>
+            <span class="d-inline-block count2">{{measurement.humidity}}%</span>
+          </h4>
+          <p class="font-weight-normal text-muted">Humidity</p>
+        </div>
+
+        <span class="font-small">Measured at: {{measurement.date[3]}}:{{measurement.date[4]}} {{measurement.date[2]}}.{{measurement.date[1]}}.{{measurement.date[0]}}</span>
+
+      </div>
+
+    </section>
+    <!--Section: Content-->
+    <br>
+    <!--Section: Content-->
+    <section class="p-5" style="border:1px solid #cecece;">
+
+      <h3 class="text-center font-weight-bold mb-5">Air Quality</h3>
+
+      <div class="row d-flex justify-content-center">
+
+        <div class="col-md-6 col-lg-4 mb-4 text-center">
+          <h4 class="h1 font-weight-normal mb-3">
+            <i class="fas fa-smog mr-2 teal-text"></i>
+            <span class="d-inline-block count-up">{{airMeasurement.pm1}}μg/m<sup>3</sup></span>
+          </h4>
+          <p class="font-weight-normal text-muted">PM1</p>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4 text-center">
+          <h4 class="h1 font-weight-normal mb-3">
+            <i class="fas fa-smog mr-2 teal-text"></i>
+            <span class="d-inline-block count1">{{airMeasurement.pm25}}μg/m<sup>3</sup></span>
+          </h4>
+          <p class="font-weight-normal text-muted">PM2.5</p>
+        </div>
+
+
+        <div class="col-md-6 col-lg-4 mb-4 text-center">
+          <h4 class="h1 font-weight-normal mb-3">
+            <i class="fas fa-smog mr-2 teal-text"></i>
+            <span class="d-inline-block count2">{{airMeasurement.pm10}}μg/m<sup>3</sup></span>
+          </h4>
+          <p class="font-weight-normal text-muted">PM10</p>
+        </div>
+        <span class="font-small">Measured at: {{airMeasurement.date[3]}}:{{airMeasurement.date[4]}} {{airMeasurement.date[2]}}.{{airMeasurement.date[1]}}.{{airMeasurement.date[0]}}</span>
+
+
+      </div>
+
+    </section>
+    <!--Section: Content-->
+
+
+  </div>
+
+</div>

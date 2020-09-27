@@ -1,0 +1,15 @@
+<section class="p-5" style="border:1px solid #cecece;">
+  <div>
+    <p>Humidity and Pressure - last 24h</p>
+    <canvas height="250" mdbChart
+            [chartType]="chartType"
+            [datasets]="chartDatasets"
+            [labels]="chartLabels"
+            [colors]="chartColors"
+            [options]="chartOptions"
+            [legend]="true"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)">
+    </canvas>
+  </div>
+</section>

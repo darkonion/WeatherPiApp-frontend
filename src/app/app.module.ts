@@ -14,11 +14,13 @@ import { HistoryAnalysisComponent } from './components/history-analysis/history-
 import { HumidityAndPressureAnalysisComponent } from './components/humidity-and-pressure-analysis/humidity-and-pressure-analysis.component';
 import { AirPurityAnalysisComponent } from './components/air-purity-analysis/air-purity-analysis.component';
 import { TemperatureAnalysisComponent } from './components/temperature-analysis/temperature-analysis.component';
+import { AboutStationComponent } from './components/about-station/about-station.component';
 
 
 const routes: Routes = [
   {path: '', component: CurrentMeasurementsComponent},
-  {path: 'history', component: HistoryAnalysisComponent}
+  {path: 'history', component: HistoryAnalysisComponent},
+  {path: 'about', component: AboutStationComponent}
 ]
 
 @NgModule({
@@ -29,6 +31,7 @@ const routes: Routes = [
     HumidityAndPressureAnalysisComponent,
     AirPurityAnalysisComponent,
     TemperatureAnalysisComponent,
+    AboutStationComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),

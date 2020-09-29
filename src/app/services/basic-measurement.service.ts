@@ -29,7 +29,7 @@ export class BasicMeasurementService {
   }
 
   getBasicMeasurementList(): Observable<BasicMeasurement[]> {
-    return this.httpClient.get<BasicMeasurement[]>(this.baseUrl + '/basic-full', { headers:
+    return this.httpClient.get<BasicMeasurement[]>(this.baseUrl + '/basic-full?int=2', { headers:
         new HttpHeaders().set('Authorization', this.token),
     })
       .pipe(

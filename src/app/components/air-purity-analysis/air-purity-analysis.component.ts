@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AirMeasurement} from "../../models/air-measurement";
 import {AirMeasurementService} from "../../services/air-measurement.service";
+import {BasicMeasurement} from "../../models/basic-measurement";
 
 @Component({
   selector: 'app-air-purity-analysis',
@@ -39,14 +40,14 @@ export class AirPurityAnalysisComponent implements OnInit {
     responsive: true,
     scales: {
       xAxes: [{
-        scaleLabel: {
-          display: true,
-          labelString: 'Time'
-        },
-        ticks: {
-          maxTicksLimit: 15,
-          maxRotation: 0,
-          padding: 10
+        type: 'time',
+        time: {
+          displayFormats: {
+            minute: 'HH:mm DD[th]'
+          },
+          minUnit: 'minute',
+          unitStepSize: 120,
+          tooltipFormat: 'HH:mm',
         }
       }],
       yAxes: [{
@@ -75,23 +76,18 @@ export class AirPurityAnalysisComponent implements OnInit {
         { data: Array.of(data.map(m => m.pm25))[0], label: 'PM2.5' },
         { data: Array.of(data.map(m => m.pm10))[0], label: 'PM10' }
       ];
-      this.chartLabels = Array.of(data.map(m => this.toTime(m)))[0]
+      this.chartLabels = data.map(m => this.toDate(m));
     })
   }
 
-  toTime(measurement: AirMeasurement): string {
-    let minutes: string = measurement.date[4];
-    let hours: string = measurement.date[3];
+  toDate(measurement: AirMeasurement): Date {
+    const year = measurement.date[0];
+    const month = measurement.date[1];
+    const day = measurement.date[2];
+    const hour = measurement.date[3];
+    const minute = measurement.date[4];
 
-    if (measurement.date[4] < 10) {
-      minutes = '0' + measurement.date[4];
-    }
-
-    if (measurement.date[3] < 10) {
-      hours = '0' + measurement.date[3];
-    }
-
-    return hours + ':' + minutes;
+    return new Date(Date.UTC(year, month-1, day, hour-2, minute));
   }
 
 }

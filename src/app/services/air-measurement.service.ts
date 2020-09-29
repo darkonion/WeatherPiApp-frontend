@@ -30,7 +30,7 @@ export class AirMeasurementService {
   }
 
   getAirMeasurementList(): Observable<AirMeasurement[]> {
-    return this.httpClient.get<AirMeasurement[]>(this.baseUrl + '/air-full', { headers:
+    return this.httpClient.get<AirMeasurement[]>(this.baseUrl + '/air-full?int=2', { headers:
         new HttpHeaders().set('Authorization', this.token),
     })
       .pipe(

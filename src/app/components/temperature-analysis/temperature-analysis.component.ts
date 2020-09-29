@@ -37,14 +37,14 @@ export class TemperatureAnalysisComponent implements OnInit {
     responsive: true,
     scales: {
       xAxes: [{
-        scaleLabel: {
-          display: true,
-          labelString: 'Time'
-        },
-        ticks: {
-          maxTicksLimit: 15,
-          maxRotation: 0,
-          padding: 10,
+        type: 'time',
+        time: {
+          displayFormats: {
+            minute: 'HH:mm DD[th]'
+          },
+          minUnit: 'minute',
+          unitStepSize: 120,
+          tooltipFormat: 'HH:mm',
         }
       }],
       yAxes: [{
@@ -73,23 +73,18 @@ export class TemperatureAnalysisComponent implements OnInit {
       this.chartDatasets = [
         {data: Array.of(data.map(m => m.temperature))[0], label: 'Temperature', yAxisID: 'first-y-axis'}
       ];
-      this.chartLabels = Array.of(data.map(m => this.toTime(m)))[0];
+      this.chartLabels = data.map(m => this.toDate(m));
     })
   }
 
-  toTime(measurement: BasicMeasurement): string {
-    let minutes: string = measurement.date[4];
-    let hours: string = measurement.date[3];
+  toDate(measurement: BasicMeasurement): Date {
+    const year = measurement.date[0];
+    const month = measurement.date[1];
+    const day = measurement.date[2];
+    const hour = measurement.date[3];
+    const minute = measurement.date[4];
 
-    if (measurement.date[4] < 10) {
-      minutes = '0' + measurement.date[4];
-    }
-
-    if (measurement.date[3] < 10) {
-      hours = '0' + measurement.date[3];
-    }
-
-    return hours + ':' + minutes;
+    return new Date(Date.UTC(year, month-1, day, hour-2, minute));
   }
 
 }

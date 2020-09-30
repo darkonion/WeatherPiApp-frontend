@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="container my-5">
-
+    <h3 class="font-weight-bold mb-5 text-center text-muted">Home Weather Station - Current Measurements</h3>
 
     <!--Section: Content-->
     <section class="p-5" style="border:1px solid #cecece;">
@@ -10,7 +10,7 @@
 
       <div class="row d-flex justify-content-center">
 
-        <div class="col-md-6 col-lg-3 mb-4 text-center">
+        <div class="col-md-6 col-lg-4 mb-4 text-center">
           <h4 class="h1 font-weight-normal mb-3">
             <i class="fas fa-thermometer-three-quarters mr-2 teal-text"></i>
             <span class="d-inline-block count-up">{{measurement.temperature}}°C</span>
@@ -26,7 +26,7 @@
           <p class="font-weight-normal text-muted">Pressure</p>
         </div>
 
-        <div class="col-md-6 col-lg-3 mb-4 text-center">
+        <div class="col-md-6 col-lg-4 mb-4 text-center">
           <h4 class="h1 font-weight-normal mb-3">
             <i class="fas fa-water mr-2 teal-text"></i>
             <span class="d-inline-block count2">{{measurement.humidity}}%</span>
@@ -34,7 +34,7 @@
           <p class="font-weight-normal text-muted">Humidity</p>
         </div>
 
-        <span class="font-small">Measured at: {{measurement.date[3]}}:{{measurement.date[4]}} {{measurement.date[2]}}.{{measurement.date[1]}}.{{measurement.date[0]}}</span>
+        <span class="font-small text-muted"><small>Measured at: {{measurementData}}</small></span>
 
       </div>
 
@@ -72,7 +72,7 @@
           </h4>
           <p class="font-weight-normal text-muted">PM10</p>
         </div>
-        <span class="font-small">Measured at: {{airMeasurement.date[3]}}:{{airMeasurement.date[4]}} {{airMeasurement.date[2]}}.{{airMeasurement.date[1]}}.{{airMeasurement.date[0]}}</span>
+        <span class="font-small text-muted"><small>Measured at: {{airMeasurementData}}</small></span>
 
 
       </div>

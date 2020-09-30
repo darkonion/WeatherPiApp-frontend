@@ -1,6 +1,6 @@
 <section class="p-5" style="border:1px solid #cecece;">
   <div>
-    <p>Temperature - last 24h</p>
+    <p class="font-small">Temperature - {{periodLabel}}</p>
     <canvas height="200" mdbChart
             [chartType]="chartType"
             [datasets]="chartDatasets"
@@ -12,4 +12,12 @@
             (chartClick)="chartClicked($event)">
     </canvas>
   </div>
+  <div class="text-center">
+    <div class="btn-group btn-group-sm mt-5 teal grey lighten-5 border border-light rounded-sm" role="group" aria-label="Basic example">
+      <button (click)="changePeriod(1)" mdbBtn type="button" color="link" size="sm" class="waves-light text-muted" mdbWavesEffect>One Day</button>
+      <button (click)="changePeriod(3)" mdbBtn type="button" color="link" size="sm" class="waves-light text-muted" mdbWavesEffect>3 Days</button>
+      <button (click)="changePeriod(5)" mdbBtn type="button" color="link" size="sm" class="waves-light text-muted" mdbWavesEffect>5 Days</button>
+    </div>
+  </div>
+
 </section>

@@ -25,11 +25,11 @@ export class BasicMeasurementService {
           console.log(err);
           this.router.navigate(['/']);
           return of(err);
-      }))
+      }));
   }
 
-  getBasicMeasurementList(): Observable<BasicMeasurement[]> {
-    return this.httpClient.get<BasicMeasurement[]>(this.baseUrl + '/basic-full?int=2', { headers:
+  getBasicMeasurementList(period: string): Observable<BasicMeasurement[]> {
+    return this.httpClient.get<BasicMeasurement[]>(this.baseUrl + '/basic-full' + period, { headers:
         new HttpHeaders().set('Authorization', this.token),
     })
       .pipe(
@@ -37,6 +37,6 @@ export class BasicMeasurementService {
           console.log(err);
           this.router.navigate(['/']);
           return of(err);
-        }))
+        }));
   }
 }

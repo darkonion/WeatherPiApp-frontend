@@ -11,6 +11,9 @@ export class TemperatureAnalysisComponent implements OnInit {
 
   public measurements: BasicMeasurement[] = [];
 
+  public measurementPeriod: string = '?int=2';
+  public periodLabel: string = 'last 24h';
+
   public chartType: string = 'line';
 
   public chartDatasets: Array<any> = [
@@ -68,13 +71,14 @@ export class TemperatureAnalysisComponent implements OnInit {
   public chartHovered(e: any): void { }
 
   getMeasurements(): void {
-    this.basicMeasurementService.getBasicMeasurementList().subscribe(data => {
-      this.measurements = data
+    console.log(new Date());
+    this.basicMeasurementService.getBasicMeasurementList(this.measurementPeriod).subscribe(data => {
+      this.measurements = data;
       this.chartDatasets = [
         {data: Array.of(data.map(m => m.temperature))[0], label: 'Temperature', yAxisID: 'first-y-axis'}
       ];
       this.chartLabels = data.map(m => this.toDate(m));
-    })
+    });
   }
 
   toDate(measurement: BasicMeasurement): Date {
@@ -84,7 +88,29 @@ export class TemperatureAnalysisComponent implements OnInit {
     const hour = measurement.date[3];
     const minute = measurement.date[4];
 
-    return new Date(Date.UTC(year, month-1, day, hour-2, minute));
+    return new Date(Date.UTC(year, month - 1, day, hour - 2, minute));
+  }
+
+  changePeriod(daysCount: number): void {
+    let interval = 2;
+
+    if (daysCount === 1) {
+      this.periodLabel = 'last 24h';
+      this.measurementPeriod = '?int=2';
+      this.ngOnInit();
+      return;
+    } else if (daysCount === 3) {
+      this.periodLabel = 'last three days';
+      interval = 5;
+    } else if (daysCount === 5) {
+      this.periodLabel = 'last five days';
+      interval = 10;
+    }
+
+    const dateNow = new Date();
+    dateNow.setDate(dateNow.getDate() - daysCount);
+    this.measurementPeriod = '?int=' + interval + '&from=' + dateNow.toISOString();
+    this.ngOnInit();
   }
 
 }

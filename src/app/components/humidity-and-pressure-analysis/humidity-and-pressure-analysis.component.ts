@@ -11,6 +11,9 @@ export class HumidityAndPressureAnalysisComponent implements OnInit {
 
   public measurements: BasicMeasurement[] = [];
 
+  public measurementPeriod: string = '?int=2';
+  public periodLabel: string = 'last 24h';
+
   public chartType: string = 'line';
 
   public chartDatasets: Array<any> = [
@@ -22,15 +25,16 @@ export class HumidityAndPressureAnalysisComponent implements OnInit {
 
   public chartColors: Array<any> = [
     {
-      backgroundColor: 'rgba(105, 0, 132, .2)',
-      borderColor: 'rgba(200, 99, 132, .7)',
-      borderWidth: 2,
-    },
-    {
       backgroundColor: 'rgba(0, 137, 132, .2)',
       borderColor: 'rgba(0, 10, 130, .7)',
       borderWidth: 2,
-    }
+    },
+    {
+      backgroundColor: 'rgb(69,191,32, .2)',
+      borderColor: 'rgb(64, 128 ,25, .7)',
+      borderWidth: 2,
+    },
+
   ];
 
   public chartOptions: any = {
@@ -77,7 +81,7 @@ export class HumidityAndPressureAnalysisComponent implements OnInit {
   public chartHovered(e: any): void { }
 
   getMeasurements(): void {
-    this.basicMeasurementService.getBasicMeasurementList().subscribe(data => {
+    this.basicMeasurementService.getBasicMeasurementList(this.measurementPeriod).subscribe(data => {
       this.measurements = data
       this.chartDatasets = [
         {data: Array.of(data.map(m => m.humidity).filter(m => m > 0.1 && m < 100))[0], label: 'Humidity', yAxisID: 'first-y-axis'},
@@ -96,4 +100,27 @@ export class HumidityAndPressureAnalysisComponent implements OnInit {
 
     return new Date(Date.UTC(year, month-1, day, hour-2, minute));
   }
+
+  changePeriod(daysCount: number): void {
+    let interval = 2;
+
+    if (daysCount === 1) {
+      this.periodLabel = 'last 24h';
+      this.measurementPeriod = '?int=2';
+      this.ngOnInit();
+      return;
+    } else if (daysCount === 3) {
+      this.periodLabel = 'last three days';
+      interval = 5;
+    } else if (daysCount === 5) {
+      this.periodLabel = 'last five days';
+      interval = 10;
+    }
+
+    const dateNow = new Date();
+    dateNow.setDate(dateNow.getDate() - daysCount);
+    this.measurementPeriod = '?int=' + interval + '&from=' + dateNow.toISOString();
+    this.ngOnInit();
+  }
+
 }

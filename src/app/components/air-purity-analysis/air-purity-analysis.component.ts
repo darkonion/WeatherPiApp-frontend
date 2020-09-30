@@ -12,6 +12,9 @@ export class AirPurityAnalysisComponent implements OnInit {
 
   public measurements: AirMeasurement[] = [];
 
+  public measurementPeriod: string = '?int=2';
+  public periodLabel: string = 'last 24h';
+
   public chartType: string = 'line';
 
   public chartDatasets: Array<any> = [
@@ -23,14 +26,15 @@ export class AirPurityAnalysisComponent implements OnInit {
   public chartLabels: Array<any> = [];
 
   public chartColors: Array<any> = [
+
     {
-      backgroundColor: 'rgba(105, 0, 132, .2)',
-      borderColor: 'rgba(200, 99, 132, .7)',
+      backgroundColor: 'rgb(241,255,71, .2)',
+      borderColor: 'rgba(239,255,29,0.7)',
       borderWidth: 2,
     },
     {
-      backgroundColor: 'rgba(0, 137, 132, .2)',
-      borderColor: 'rgba(0, 10, 130, .7)',
+      backgroundColor: 'rgba(105, 0, 132, .2)',
+      borderColor: 'rgba(206,72,116,0.7)',
       borderWidth: 2,
     }
   ];
@@ -69,7 +73,7 @@ export class AirPurityAnalysisComponent implements OnInit {
   public chartHovered(e: any): void { }
 
   getMeasurements(): void {
-    this.airMeasurementService.getAirMeasurementList().subscribe(data => {
+    this.airMeasurementService.getAirMeasurementList(this.measurementPeriod).subscribe(data => {
       this.measurements = data
       this.chartDatasets = [
         { data: Array.of(data.map(m => m.pm1))[0], label: 'PM1.0' },
@@ -77,7 +81,7 @@ export class AirPurityAnalysisComponent implements OnInit {
         { data: Array.of(data.map(m => m.pm10))[0], label: 'PM10' }
       ];
       this.chartLabels = data.map(m => this.toDate(m));
-    })
+    });
   }
 
   toDate(measurement: AirMeasurement): Date {
@@ -89,5 +93,28 @@ export class AirPurityAnalysisComponent implements OnInit {
 
     return new Date(Date.UTC(year, month-1, day, hour-2, minute));
   }
+
+  changePeriod(daysCount: number): void {
+    let interval = 2;
+
+    if (daysCount === 1) {
+      this.periodLabel = 'last 24h';
+      this.measurementPeriod = '?int=2';
+      this.ngOnInit();
+      return;
+    } else if (daysCount === 3) {
+      this.periodLabel = 'last three days';
+      interval = 5;
+    } else if (daysCount === 5) {
+      this.periodLabel = 'last five days';
+      interval = 10;
+    }
+
+    const dateNow = new Date();
+    dateNow.setDate(dateNow.getDate() - daysCount);
+    this.measurementPeriod = '?int=' + interval + '&from=' + dateNow.toISOString();
+    this.ngOnInit();
+  }
+
 
 }

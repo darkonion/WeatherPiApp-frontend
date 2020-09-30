@@ -26,11 +26,11 @@ export class AirMeasurementService {
           console.log(err);
           this.router.navigate(['/']);
           return of(err);
-        }))
+        }));
   }
 
-  getAirMeasurementList(): Observable<AirMeasurement[]> {
-    return this.httpClient.get<AirMeasurement[]>(this.baseUrl + '/air-full?int=2', { headers:
+  getAirMeasurementList(period: string): Observable<AirMeasurement[]> {
+    return this.httpClient.get<AirMeasurement[]>(this.baseUrl + '/air-full' + period, { headers:
         new HttpHeaders().set('Authorization', this.token),
     })
       .pipe(
@@ -38,6 +38,6 @@ export class AirMeasurementService {
           console.log(err);
           this.router.navigate(['/']);
           return of(err);
-        }))
+        }));
   }
 }

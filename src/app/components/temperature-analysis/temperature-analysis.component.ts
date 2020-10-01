@@ -18,6 +18,7 @@ export class TemperatureAnalysisComponent implements OnInit {
 
   public chartDatasets: Array<any> = [
     { data: [], label: 'Temperature', yAxisID: 'first-y-axis' },
+    { data: [], label: 'Light', yAxisID: 'second-y-axis' },
   ];
 
   public chartLabels: Array<any> = [];
@@ -29,8 +30,8 @@ export class TemperatureAnalysisComponent implements OnInit {
       borderWidth: 2,
     },
     {
-      backgroundColor: 'rgba(0, 137, 132, .2)',
-      borderColor: 'rgba(0, 10, 130, .7)',
+      backgroundColor: 'rgb(241,255,71, .2)',
+      borderColor: 'rgba(239,255,29,0.7)',
       borderWidth: 2,
     }
   ];
@@ -57,6 +58,14 @@ export class TemperatureAnalysisComponent implements OnInit {
           display: true,
           labelString: 'Humidity [%]'
         }
+      }, {
+        id: 'second-y-axis',
+        type: 'linear',
+        position: 'right',
+        scaleLabel: {
+          display: true,
+          labelString: 'Light [lux]'
+        }
       }]
     }
   };
@@ -75,7 +84,8 @@ export class TemperatureAnalysisComponent implements OnInit {
     this.basicMeasurementService.getBasicMeasurementList(this.measurementPeriod).subscribe(data => {
       this.measurements = data;
       this.chartDatasets = [
-        {data: Array.of(data.map(m => m.temperature))[0], label: 'Temperature', yAxisID: 'first-y-axis'}
+        {data: data.map(m => m.temperature), label: 'Temperature', yAxisID: 'first-y-axis'},
+        {data: data.map(m => m.lux), label: 'Light', yAxisID: 'second-y-axis'}
       ];
       this.chartLabels = data.map(m => this.toDate(m));
     });

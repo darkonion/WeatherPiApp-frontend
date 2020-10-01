@@ -59,7 +59,7 @@ export class HumidityAndPressureAnalysisComponent implements OnInit {
           display: true,
           labelString: 'Humidity [%]'
         }
-      },{
+      }, {
         id: 'second-y-axis',
         type: 'linear',
         position: 'right',

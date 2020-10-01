@@ -34,8 +34,19 @@
           <p class="font-weight-normal text-muted">Humidity</p>
         </div>
 
-        <span class="font-small text-muted"><small>Measured at: {{measurementData}}</small></span>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-6 col-lg-3 mb-4 text-center">
+          <h4 class="h1 font-weight-normal mb-3">
+            <i class="fas fa-sun mr-2 teal-text"></i>
+            <span class="d-inline-block count2">{{measurement.lux}}lux</span>
+          </h4>
+          <p class="font-weight-normal text-muted">Light</p>
+        </div>
 
+      </div>
+      <div class="text-center">
+        <span class="font-small text-muted"><small>Measured at: {{measurementData}}</small></span>
       </div>
 
     </section>

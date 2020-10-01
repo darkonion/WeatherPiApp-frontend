@@ -56,7 +56,7 @@ export class TemperatureAnalysisComponent implements OnInit {
         type: 'linear',
         scaleLabel: {
           display: true,
-          labelString: 'Humidity [%]'
+          labelString: 'Temperature [°C]'
         }
       }, {
         id: 'second-y-axis',

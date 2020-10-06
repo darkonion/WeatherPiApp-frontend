@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AirMeasurement} from "../../models/air-measurement";
 import {AirMeasurementService} from "../../services/air-measurement.service";
-import {BasicMeasurement} from "../../models/basic-measurement";
+import {interval, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-air-purity-analysis',
@@ -9,6 +9,8 @@ import {BasicMeasurement} from "../../models/basic-measurement";
   styleUrls: ['./air-purity-analysis.component.scss']
 })
 export class AirPurityAnalysisComponent implements OnInit {
+
+  private updateSubscription: Subscription;
 
   public measurements: AirMeasurement[] = [];
 
@@ -67,6 +69,7 @@ export class AirPurityAnalysisComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMeasurements();
+    this.updateSubscription = interval(30000).subscribe(() => this.getMeasurements());
   }
 
   public chartClicked(e: any): void { }
@@ -74,7 +77,7 @@ export class AirPurityAnalysisComponent implements OnInit {
 
   getMeasurements(): void {
     this.airMeasurementService.getAirMeasurementList(this.measurementPeriod).subscribe(data => {
-      this.measurements = data
+      this.measurements = data;
       this.chartDatasets = [
         { data: Array.of(data.map(m => m.pm1))[0], label: 'PM1.0' },
         { data: Array.of(data.map(m => m.pm25))[0], label: 'PM2.5' },

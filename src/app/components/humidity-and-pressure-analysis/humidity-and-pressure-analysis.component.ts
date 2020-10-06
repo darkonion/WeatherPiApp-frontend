@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BasicMeasurement} from "../../models/basic-measurement";
 import {BasicMeasurementService} from "../../services/basic-measurement.service";
+import {interval, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-humidity-and-pressure-analysis',
@@ -8,6 +9,8 @@ import {BasicMeasurementService} from "../../services/basic-measurement.service"
   styleUrls: ['./humidity-and-pressure-analysis.component.scss']
 })
 export class HumidityAndPressureAnalysisComponent implements OnInit {
+
+  private updateSubscription: Subscription;
 
   public measurements: BasicMeasurement[] = [];
 
@@ -75,6 +78,7 @@ export class HumidityAndPressureAnalysisComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMeasurements();
+    this.updateSubscription = interval(30000).subscribe(() => this.getMeasurements());
   }
 
   public chartClicked(e: any): void { }

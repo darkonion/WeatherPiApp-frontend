@@ -4,6 +4,7 @@ import {BasicMeasurement} from "../../models/basic-measurement";
 import {AirMeasurement} from "../../models/air-measurement";
 import {AirMeasurementService} from "../../services/air-measurement.service";
 import {Data} from 'angular-bootstrap-md/lib/free/utils/positioning/models';
+import {interval, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-current-measurements',
@@ -11,6 +12,8 @@ import {Data} from 'angular-bootstrap-md/lib/free/utils/positioning/models';
   styleUrls: ['./current-measurements.component.scss']
 })
 export class CurrentMeasurementsComponent implements OnInit {
+
+  private updateSubscription: Subscription;
 
   measurement: BasicMeasurement = new BasicMeasurement();
   measurementData: string = null;
@@ -23,6 +26,11 @@ export class CurrentMeasurementsComponent implements OnInit {
   ngOnInit(): void {
     this.getBasicMeasurement();
     this.getAirMeasurement();
+
+    this.updateSubscription = interval(30000).subscribe(() => {
+      this.getBasicMeasurement();
+      this.getAirMeasurement();
+    });
   }
 
   getBasicMeasurement() {

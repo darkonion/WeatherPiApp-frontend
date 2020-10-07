@@ -28,13 +28,13 @@ export class HumidityAndPressureAnalysisComponent implements OnInit {
 
   public chartColors: Array<any> = [
     {
-      backgroundColor: 'rgba(0, 137, 132, .2)',
-      borderColor: 'rgba(0, 10, 130, .7)',
+      backgroundColor: 'rgb(0,34,137, 0.4)',
+      borderColor: 'rgba(0, 10, 130, .8)',
       borderWidth: 2,
     },
     {
-      backgroundColor: 'rgb(69,191,32, .2)',
-      borderColor: 'rgb(64, 128 ,25, .7)',
+      backgroundColor: 'rgba(51,146,23,0.4)',
+      borderColor: 'rgb(64, 128 ,25, .8)',
       borderWidth: 2,
     },
 
@@ -46,6 +46,9 @@ export class HumidityAndPressureAnalysisComponent implements OnInit {
     scales: {
       xAxes: [{
         type: 'time',
+        ticks: {
+          fontColor: 'rgb(180,180,180)'
+        },
         time: {
           displayFormats: {
             minute: 'HH:mm DD[th]'
@@ -58,13 +61,25 @@ export class HumidityAndPressureAnalysisComponent implements OnInit {
       yAxes: [{
         id: 'first-y-axis',
         type: 'linear',
+        gridLines: {
+          color: 'rgb(73,73,73)'
+        },
+        ticks: {
+          fontColor: 'rgb(180,180,180)'
+        },
         scaleLabel: {
           display: true,
-          labelString: 'Humidity [%]'
+          labelString: 'Humidity [%]',
         }
       }, {
         id: 'second-y-axis',
         type: 'linear',
+        gridLines: {
+          color: 'rgb(73,73,73)'
+        },
+        ticks: {
+          fontColor: 'rgb(180,180,180)'
+        },
         position: 'right',
         scaleLabel: {
           display: true,

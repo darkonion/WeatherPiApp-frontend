@@ -30,15 +30,21 @@ export class AirPurityAnalysisComponent implements OnInit {
   public chartColors: Array<any> = [
 
     {
-      backgroundColor: 'rgb(241,255,71, .2)',
-      borderColor: 'rgba(239,255,29,0.7)',
+      backgroundColor: 'rgb(241,255,71, .4)',
+      borderColor: 'rgba(239,255,29,0.8)',
       borderWidth: 2,
     },
     {
-      backgroundColor: 'rgba(105, 0, 132, .2)',
-      borderColor: 'rgba(206,72,116,0.7)',
+      backgroundColor: 'rgba(105, 0, 132, .4)',
+      borderColor: 'rgba(206,72,116,0.8)',
+      borderWidth: 2,
+    },
+    {
+      backgroundColor: 'rgb(102,102,102, .4)',
+      borderColor: 'rgba(201,201,201,0.8)',
       borderWidth: 2,
     }
+
   ];
 
   public chartOptions: any = {
@@ -47,6 +53,9 @@ export class AirPurityAnalysisComponent implements OnInit {
     scales: {
       xAxes: [{
         type: 'time',
+        ticks: {
+          fontColor: 'rgb(180,180,180)'
+        },
         time: {
           displayFormats: {
             minute: 'HH:mm DD[th]'
@@ -57,6 +66,12 @@ export class AirPurityAnalysisComponent implements OnInit {
         }
       }],
       yAxes: [{
+        ticks: {
+          fontColor: 'rgb(180,180,180)'
+        },
+        gridLines: {
+          color: 'rgb(73,73,73)'
+        },
         scaleLabel: {
           display: true,
           labelString: 'Concentration [μg/m3]',

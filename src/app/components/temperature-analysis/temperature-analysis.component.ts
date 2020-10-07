@@ -28,13 +28,13 @@ export class TemperatureAnalysisComponent implements OnInit {
 
   public chartColors: Array<any> = [
     {
-      backgroundColor: 'rgba(105, 0, 132, .2)',
-      borderColor: 'rgba(200, 99, 132, .7)',
+      backgroundColor: 'rgba(105, 0, 132, .4)',
+      borderColor: 'rgba(200, 99, 132, .8)',
       borderWidth: 2,
     },
     {
-      backgroundColor: 'rgb(241,255,71, .2)',
-      borderColor: 'rgba(239,255,29,0.7)',
+      backgroundColor: 'rgb(241,255,71, .4)',
+      borderColor: 'rgba(239,255,29, .8)',
       borderWidth: 2,
     }
   ];
@@ -45,6 +45,9 @@ export class TemperatureAnalysisComponent implements OnInit {
     scales: {
       xAxes: [{
         type: 'time',
+        ticks: {
+          fontColor: 'rgb(180,180,180)'
+        },
         time: {
           displayFormats: {
             minute: 'HH:mm DD[th]'
@@ -57,17 +60,29 @@ export class TemperatureAnalysisComponent implements OnInit {
       yAxes: [{
         id: 'first-y-axis',
         type: 'linear',
+        gridLines: {
+          color: 'rgb(73,73,73)'
+        },
+        ticks: {
+          fontColor: 'rgb(180,180,180)'
+        },
         scaleLabel: {
           display: true,
-          labelString: 'Temperature [°C]'
+          labelString: 'Temperature [°C]',
         }
       }, {
         id: 'second-y-axis',
         type: 'linear',
+        gridLines: {
+          color: 'rgb(73,73,73)'
+        },
+        ticks: {
+          fontColor: 'rgb(180,180,180)'
+        },
         position: 'right',
         scaleLabel: {
           display: true,
-          labelString: 'Light [lux]'
+          labelString: 'Light [lux]',
         }
       }]
     }

@@ -33,7 +33,7 @@ export class HumidityAndPressureAnalysisComponent implements OnInit {
       borderWidth: 2,
     },
     {
-      backgroundColor: 'rgba(51,146,23,0.4)',
+      backgroundColor: 'rgba(0, 121, 107,0.4)',
       borderColor: 'rgb(64, 128 ,25, .8)',
       borderWidth: 2,
     },

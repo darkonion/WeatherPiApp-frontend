@@ -1,101 +1,98 @@
-<div class="container">
+<div class="container mb-5">
 
-  <div class="container">
-    <div class="my-5 text-center" style="background-color: rgba(10,10,10, .8); color: rgb(227,227,227);">
-      <br>
-      <h3 class="font-weight-bold text-center">Home Weather Station - Current Measurements</h3>
-      <br>
-    </div>
+  <div class="my-5 text-center" style="background-color: rgba(10,10,10, .8); color: rgb(227,227,227);">
 
-    <!--Section: Content-->
-    <section class="p-5" style="background-color: rgba(10,10,10, .7); color: rgb(227,227,227);" >
-
-      <h3 class="text-center font-weight-bold mb-5">Weather conditions</h3>
-
-      <div class="row d-flex justify-content-center">
-
-        <div class="col-md-6 col-lg-4 mb-4 text-center">
-          <h4 class="h1 font-weight-normal mb-3">
-            <i class="fas fa-thermometer-three-quarters mr-2 teal-text"></i>
-            <span class="d-inline-block count-up">{{measurement.temperature}}°C</span>
-          </h4>
-          <p class="font-weight-normal">Temperature</p>
-        </div>
-
-        <div class="col-md-6 col-lg-4 mb-4 text-center">
-          <h4 class="h1 font-weight-normal mb-3">
-            <i class="fas fa-arrow-down mr-2 teal-text"></i>
-            <span class="d-inline-block count1">{{measurement.pressure}}hPa</span>
-          </h4>
-          <p class="font-weight-normal">Pressure</p>
-        </div>
-
-        <div class="col-md-6 col-lg-4 mb-4 text-center">
-          <h4 class="h1 font-weight-normal mb-3">
-            <i class="fas fa-water mr-2 teal-text"></i>
-            <span class="d-inline-block count2">{{measurement.humidity}}%</span>
-          </h4>
-          <p class="font-weight-normal">Humidity</p>
-        </div>
-
-      </div>
-      <div class="row d-flex justify-content-center">
-        <div class="col-md-6 col-lg-3 mb-4 text-center">
-          <h4 class="h1 font-weight-normal mb-3">
-            <i class="fas fa-sun mr-2 teal-text"></i>
-            <span class="d-inline-block count2">{{measurement.lux}}lux</span>
-          </h4>
-          <p class="font-weight-normal">Light</p>
-        </div>
-
-      </div>
-      <div class="text-center">
-        <span class="font-small"><small>Measured at: {{measurementData}}</small></span>
-      </div>
-
-    </section>
-    <!--Section: Content-->
-    <br>
-    <!--Section: Content-->
-    <section class="p-5" style="background-color: rgba(10,10,10, .7); color: rgb(227,227,227);" >
-
-      <h3 class="text-center font-weight-bold mb-5">Air Quality</h3>
-
-      <div class="row d-flex justify-content-center">
-
-        <div class="col-md-6 col-lg-4 mb-4 text-center">
-          <h4 class="h1 font-weight-normal mb-3">
-            <i class="fas fa-smog mr-2 teal-text"></i>
-            <span class="d-inline-block count-up">{{airMeasurement.pm1}}μg/m<sup>3</sup></span>
-          </h4>
-          <p class="font-weight-normal">PM1</p>
-        </div>
-
-        <div class="col-md-6 col-lg-4 mb-4 text-center">
-          <h4 class="h1 font-weight-normal mb-3">
-            <i class="fas fa-smog mr-2 teal-text"></i>
-            <span class="d-inline-block count1">{{airMeasurement.pm25}}μg/m<sup>3</sup></span>
-          </h4>
-          <p class="font-weight-normal">PM2.5</p>
-        </div>
-
-
-        <div class="col-md-6 col-lg-4 mb-4 text-center">
-          <h4 class="h1 font-weight-normal mb-3">
-            <i class="fas fa-smog mr-2 teal-text"></i>
-            <span class="d-inline-block count2">{{airMeasurement.pm10}}μg/m<sup>3</sup></span>
-          </h4>
-          <p class="font-weight-normal">PM10</p>
-        </div>
-        <span class="font-small"><small>Measured at: {{airMeasurementData}}</small></span>
-
-
-      </div>
-
-    </section>
-    <!--Section: Content-->
-    <div class="container my-5">&nbsp</div>
+    <h3 class="font-weight-bold text-center p-5">Home Weather Station - Current Measurements</h3>
 
   </div>
+
+  <!--Section: Content-->
+  <section class="p-5" style="background-color: rgba(10,10,10, .7); color: rgb(227,227,227);">
+
+    <h3 class="text-center font-weight-bold mb-5">Weather conditions</h3>
+
+    <div class="row d-flex justify-content-center">
+
+      <div class="col-md-6 col-lg-4 mb-4 text-center">
+        <h4 class="h1 font-weight-normal mb-3">
+          <i class="fas fa-thermometer-three-quarters mr-2" style="color: #00796b;"></i>
+          <span class="d-inline-block count-up">{{measurement.temperature}}°C</span>
+        </h4>
+        <p class="font-weight-normal">Temperature</p>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4 text-center">
+        <h4 class="h1 font-weight-normal mb-3">
+          <i class="fas fa-arrow-down mr-2" style="color: #00796b;"></i>
+          <span class="d-inline-block count1">{{measurement.pressure}}hPa</span>
+        </h4>
+        <p class="font-weight-normal">Pressure</p>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4 text-center">
+        <h4 class="h1 font-weight-normal mb-3">
+          <i class="fas fa-water mr-2" style="color: #00796b;"></i>
+          <span class="d-inline-block count2">{{measurement.humidity}}%</span>
+        </h4>
+        <p class="font-weight-normal">Humidity</p>
+      </div>
+
+    </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-6 col-lg-3 mb-4 text-center">
+        <h4 class="h1 font-weight-normal mb-3">
+          <i class="fas fa-sun mr-2" style="color: #00796b;"></i>
+          <span class="d-inline-block count2">{{measurement.lux}}lux</span>
+        </h4>
+        <p class="font-weight-normal">Light</p>
+      </div>
+
+    </div>
+    <div class="text-center">
+      <span class="font-small"><small>Measured at: {{measurementData}}</small></span>
+    </div>
+
+  </section>
+  <!--Section: Content-->
+  <br>
+  <!--Section: Content-->
+  <section class="p-5" style="background-color: rgba(10,10,10, .7); color: rgb(227,227,227);">
+
+    <h3 class="text-center font-weight-bold mb-5">Air Quality</h3>
+
+    <div class="row d-flex justify-content-center">
+
+      <div class="col-md-6 col-lg-4 mb-4 text-center">
+        <h4 class="h1 font-weight-normal mb-3">
+          <i class="fas fa-smog mr-2" style="color: #00796b;"></i>
+          <span class="d-inline-block count-up">{{airMeasurement.pm1}}μg/m<sup>3</sup></span>
+        </h4>
+        <p class="font-weight-normal">PM1</p>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mb-4 text-center">
+        <h4 class="h1 font-weight-normal mb-3">
+          <i class="fas fa-smog mr-2" style="color: #00796b;"></i>
+          <span class="d-inline-block count1">{{airMeasurement.pm25}}μg/m<sup>3</sup></span>
+        </h4>
+        <p class="font-weight-normal">PM2.5</p>
+      </div>
+
+
+      <div class="col-md-6 col-lg-4 mb-4 text-center">
+        <h4 class="h1 font-weight-normal mb-3">
+          <i class="fas fa-smog mr-2" style="color: #00796b;"></i>
+          <span class="d-inline-block count2">{{airMeasurement.pm10}}μg/m<sup>3</sup></span>
+        </h4>
+        <p class="font-weight-normal">PM10</p>
+      </div>
+      <span class="font-small"><small>Measured at: {{airMeasurementData}}</small></span>
+
+
+    </div>
+
+  </section>
+  <!--Section: Content-->
+
 
 </div>

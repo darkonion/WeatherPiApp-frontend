@@ -28,8 +28,8 @@ export class HumidityAndPressureAnalysisComponent implements OnInit {
 
   public chartColors: Array<any> = [
     {
-      backgroundColor: 'rgb(0,34,137, 0.4)',
-      borderColor: 'rgba(0, 10, 130, .8)',
+      backgroundColor: 'rgba(11,57,243,0.4)',
+      borderColor: 'rgba(0,10,130,0.8)',
       borderWidth: 2,
     },
     {

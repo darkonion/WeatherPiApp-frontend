@@ -28,13 +28,13 @@ export class TemperatureAnalysisComponent implements OnInit {
 
   public chartColors: Array<any> = [
     {
-      backgroundColor: 'rgba(105, 0, 132, .4)',
-      borderColor: 'rgba(200, 99, 132, .8)',
+      backgroundColor: 'rgba(239,72,100,0.4)',
+      borderColor: 'rgba(241,36,97,0.8)',
       borderWidth: 2,
     },
     {
       backgroundColor: 'rgb(241,255,71, .4)',
-      borderColor: 'rgba(239,255,29, .8)',
+      borderColor: 'rgba(239,255,60,0.8)',
       borderWidth: 2,
     }
   ];

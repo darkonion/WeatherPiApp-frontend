@@ -14,7 +14,7 @@ export class AirPurityAnalysisComponent implements OnInit {
 
   public measurements: AirMeasurement[] = [];
 
-  public measurementPeriod: string = '?int=2';
+  public measurementPeriod: string = '?int=1';
   public periodLabel: string = 'last 24h';
 
   public chartType: string = 'line';

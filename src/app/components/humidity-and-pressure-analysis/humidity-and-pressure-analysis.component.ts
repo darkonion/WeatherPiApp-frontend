@@ -14,7 +14,7 @@ export class HumidityAndPressureAnalysisComponent implements OnInit {
 
   public measurements: BasicMeasurement[] = [];
 
-  public measurementPeriod: string = '?int=2';
+  public measurementPeriod: string = '?int=1';
   public periodLabel: string = 'last 24h';
 
   public chartType: string = 'line';
@@ -103,7 +103,7 @@ export class HumidityAndPressureAnalysisComponent implements OnInit {
     this.basicMeasurementService.getBasicMeasurementList(this.measurementPeriod).subscribe(data => {
       this.measurements = data
       this.chartDatasets = [
-        {data: Array.of(data.map(m => m.humidity).filter(m => m > 0.1 && m < 100))[0], label: 'Humidity', yAxisID: 'first-y-axis'},
+        {data: Array.of(data.map(m => m.humidity).filter(m => m > 0.1))[0], label: 'Humidity', yAxisID: 'first-y-axis'},
         {data: Array.of(data.map(m => m.pressure).filter(m => m < 1100 && m > 900))[0], label: 'Pressure', yAxisID: 'second-y-axis'}
       ];
       this.chartLabels = data.map(m => this.toDate(m));

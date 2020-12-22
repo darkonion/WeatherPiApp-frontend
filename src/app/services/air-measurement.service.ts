@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import {Observable, of} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {AirMeasurement} from "../models/air-measurement";
-import {BasicMeasurement} from "../models/basic-measurement";
+
 
 @Injectable({
   providedIn: 'root'

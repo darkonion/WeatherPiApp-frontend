@@ -74,6 +74,7 @@
         <h4 class="h1 font-weight-normal mb-3">
           <i class="fas fa-smog mr-2" style="color: #00796b;"></i>
           <span class="d-inline-block count1">{{airMeasurement.pm25}}μg/m<sup>3</sup></span>
+          <p class="font-small mt-2">({{roundResult(airMeasurement.pm25/25*100)}}% of WHO limit)</p>
         </h4>
         <p class="font-weight-normal">PM2.5</p>
       </div>

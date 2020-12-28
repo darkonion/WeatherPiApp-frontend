@@ -27,6 +27,7 @@
     "animate.css": "^4.1.1",
     "bootstrap": "^4.5.2",
     "chart.js": "^2.5.0",
+    "chartjs-plugin-annotation": "^0.5.7",
     "hammerjs": "^2.0.8",
     "jquery": "^3.5.1",
     "mdbootstrap": "^4.19.0",

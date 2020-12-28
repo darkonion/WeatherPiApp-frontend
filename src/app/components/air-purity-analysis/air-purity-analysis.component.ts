@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AirMeasurement} from "../../models/air-measurement";
 import {AirMeasurementService} from "../../services/air-measurement.service";
 import {interval, Subscription} from 'rxjs';
+import * as ChartAnnotation from 'chartjs-plugin-annotation';
+import * as Chart from "chart.js";
 
 @Component({
   selector: 'app-air-purity-analysis',
@@ -50,6 +52,57 @@ export class AirPurityAnalysisComponent implements OnInit {
   public chartOptions: any = {
     maintainAspectRatio: false,
     responsive: true,
+    annotation: {
+      annotations: [{
+        type:'line',
+        scaleID: 'y-axis-0',
+        mode:'horizontal',
+        value:'25',
+        borderColor:'#e07b10',
+        borderWidth:1,
+        label: {
+          backgroundColor: 'rgb(189,141,11)',
+          font: {
+            family: "sans-serif",
+            size: 8,
+            color: "#fff",
+          },
+          xPadding: 2,
+          yPadding: 2,
+          cornerRadius: 3,
+          position: "left",
+          xAdjust: 0,
+          yAdjust: 0,
+          enabled: true,
+          content: "WHO limit",
+          rotation: 90,
+        }
+      }, {
+        type:'line',
+        scaleID: 'y-axis-0',
+        mode:'horizontal',
+        value:'50',
+        borderColor:'#ac1616',
+        borderWidth:1,
+        label: {
+          backgroundColor: 'rgb(215,48,48)',
+          font: {
+            family: "sans-serif",
+            size: 8,
+            color: "#fff",
+          },
+          xPadding: 2,
+          yPadding: 2,
+          cornerRadius: 3,
+          position: "left",
+          xAdjust: 0,
+          yAdjust: 0,
+          enabled: true,
+          content: "PL limit",
+          rotation: 90,
+        }
+      }]
+    },
     scales: {
       xAxes: [{
         type: 'time',
@@ -83,6 +136,10 @@ export class AirPurityAnalysisComponent implements OnInit {
   constructor(private airMeasurementService: AirMeasurementService) { }
 
   ngOnInit(): void {
+    let namedChartAnnotation = ChartAnnotation;
+    namedChartAnnotation["id"]="annotation";
+    Chart.pluginService.register( namedChartAnnotation);
+
     this.getMeasurements();
     this.updateSubscription = interval(30000).subscribe(() => this.getMeasurements());
   }

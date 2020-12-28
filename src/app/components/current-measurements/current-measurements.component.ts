@@ -49,6 +49,10 @@ export class CurrentMeasurementsComponent implements OnInit {
     });
   }
 
+  roundResult(result: number) {
+    return Math.round(result);
+  }
+
   toDate(measurement): Date {
     const year = measurement.date[0];
     const month = measurement.date[1];

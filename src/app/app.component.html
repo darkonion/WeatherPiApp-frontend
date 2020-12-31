@@ -20,9 +20,13 @@
         <li class="nav-item waves-light" mdbWavesEffect>
           <a class="nav-link waves-light" routerLink="/about">About Station</a>
         </li>
+        <li *ngIf="checkUser()" class="nav-item waves-light" mdbWavesEffect>
+          <a class="nav-link waves-light text-danger" routerLink="/admin">Admin</a>
+        </li>
       </ul>
 
       <div class="mr-5 font-small text-white">Location: Warsaw, Imielin</div>
+      <a *ngIf="checkUser()" class="text-danger" (click)="logout()">Logout</a>
 
       <ul class="navbar-nav nav-flex-icons">
         <li class="nav-item">
@@ -57,6 +61,7 @@
           <!-- Copyright -->
           <div class="footer-copyright text-center py-3">© 2020 Copyright:
             <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+            <div class="mt-2" ><a routerLink="/login">Login</a></div>
           </div>
           <!-- Copyright -->
 

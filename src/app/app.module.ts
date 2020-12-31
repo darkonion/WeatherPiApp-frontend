@@ -17,6 +17,8 @@ import { TemperatureAnalysisComponent } from './components/temperature-analysis/
 import { AboutStationComponent } from './components/about-station/about-station.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { StatisticsComponent } from './components/statistics/statistics/statistics.component';
+import { LoginComponent } from './components/login/login.component';
+import {CookieService} from "ngx-cookie-service";
 
 
 const routes: Routes = [
@@ -24,7 +26,8 @@ const routes: Routes = [
   {path: 'history', component: HistoryAnalysisComponent},
   {path: 'about', component: AboutStationComponent},
   {path: 'admin', component: SettingsComponent},
-  {path: 'stats', component: StatisticsComponent}
+  {path: 'stats', component: StatisticsComponent},
+  {path: 'login', component: LoginComponent}
 ]
 
 @NgModule({
@@ -38,6 +41,7 @@ const routes: Routes = [
     AboutStationComponent,
     SettingsComponent,
     StatisticsComponent,
+    LoginComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),

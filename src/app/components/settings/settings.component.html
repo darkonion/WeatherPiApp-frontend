@@ -2,27 +2,34 @@
   <div class="my-5 text-center" style="background-color: rgba(10,10,10, .8); color: rgb(227,227,227);">
     <h3 class="font-weight-bold text-center p-5">Admin Panel</h3>
   </div>
-
-  <div class="p-5" style="background-color: rgba(10,10,10,0.8); color: rgb(227,227,227);" >
-    <form [formGroup]="cronFormGroup">
-      <div class="col-lg-4 mb-5 font-small">
-        <label>Basic Measurement Time Interval</label>
-        <select formControlName="basicCron" class="custom-select">
-          <option *ngFor="let bCron of basicCrons" [ngValue]="bCron">
-            {{bCron.split("/")[1].split(" ")[0]}} min
-          </option>
-        </select>
+  <div *ngIf="checkUser() && cronFormGroup">
+      <div class="p-5" style="background-color: rgba(10,10,10,0.8); color: rgb(227,227,227);" >
+        <form [formGroup]="cronFormGroup">
+          <div class="col-lg-4 mb-5 font-small">
+            <label>Basic Measurement Time Interval</label>
+            <select formControlName="basicCron" class="custom-select">
+              <option *ngFor="let bCron of basicCrons" [ngValue]="bCron">
+                {{bCron.split("/")[1].split(" ")[0]}} min
+              </option>
+            </select>
+          </div>
+          <div class="col-lg-4 mb-5 font-small">
+            <label>Air Measurement Time Interval </label>
+            <select formControlName="airCron" class="custom-select">
+              <option *ngFor="let aCron of airCrons" [ngValue]="aCron">
+                {{aCron.split("/")[1].split(" ")[0]}} min
+              </option>
+            </select>
+          </div>
+          <div class="mt-4">
+            <button (click)="submitNewCron()" class="btn btn-outline-light">Submit</button>
+          </div>
+        </form>
       </div>
-      <div class="col-lg-4 mb-5 font-small">
-        <label>Air Measurement Time Interval </label>
-        <select formControlName="airCron" class="custom-select">
-          <option *ngFor="let aCron of airCrons" [ngValue]="aCron">
-            {{aCron.split("/")[1].split(" ")[0]}} min
-          </option>
-        </select>
-      </div>
-    </form>
   </div>
+  <ng-template #elseBlock>401 Unauthorized</ng-template>
+
+
   <div class="container my-5">.</div>
   <div class="container my-5">.</div>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SettingsService} from "../../services/settings.service";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Cron} from "../../models/cron";
+import {LoginService} from "../../services/login.service";
 
 @Component({
   selector: 'app-settings',
@@ -13,11 +14,13 @@ export class SettingsComponent implements OnInit {
   public cron :Cron;
   private promise: Promise<unknown>;
 
+  private isAdmin: boolean;
+
   cronFormGroup: FormGroup;
-  airCrons :string[] = ["0 */5 * * * *", "0 */10 * * * *", "0 */15 * * * *", "0 */30 * * * *"];
+  airCrons :string[] = ["20 */5 * * * *", "20 */10 * * * *", "20 */15 * * * *", "20 */30 * * * *"];
   basicCrons :string[] = ["0 */5 * * * *", "0 */10 * * * *", "0 */15 * * * *", "0 */30 * * * *"];
 
-  constructor(private formBuilder: FormBuilder, private settingsService : SettingsService) { }
+  constructor(private formBuilder: FormBuilder, private settingsService : SettingsService, private loginService: LoginService) { }
 
   ngOnInit(): void {
 
@@ -29,6 +32,12 @@ export class SettingsComponent implements OnInit {
     this.promise.then(() => {
       this.getCronFormGroup();
     });
+
+    this.loginService.checkRole().subscribe(data => {
+      if (data === false || data === true) {
+        this.isAdmin = data;
+      }
+    });
   }
 
   private getCronFormGroup() {
@@ -39,12 +48,20 @@ export class SettingsComponent implements OnInit {
     })
   }
 
-  compareAirCron(item1) {
-    return item1.equals(this.cron.airCron);
+  submitNewCron(): void {
+    let cron: Cron = new Cron();
+    cron.set(
+      this.cronFormGroup.get("basicCron").value,
+      this.cronFormGroup.get("airCron").value
+    );
+    console.log("Persisting new cron: " + cron.toString());
+
+    this.settingsService.updateCron(cron).subscribe(data => console.log('Response status %d', data.status));
   }
 
-  compareBasicCron(item1, item2): boolean {
-    return item1.split("/")[1].split(" ")[0] == this.cron.airCron.split("/")[1].split(" ")[0];
+  checkUser(): boolean {
+    return this.isAdmin;
   }
+
 
 }

@@ -3,6 +3,7 @@ import {SettingsService} from "../../services/settings.service";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Cron} from "../../models/cron";
 import {LoginService} from "../../services/login.service";
+import {StatisticsService} from "../../services/statistics.service";
 
 @Component({
   selector: 'app-settings',
@@ -14,13 +15,19 @@ export class SettingsComponent implements OnInit {
   public cron :Cron;
   private promise: Promise<unknown>;
 
+  public basicCount: number = 0;
+  public airCount: number = 0;
+
   private isAdmin: boolean;
 
   cronFormGroup: FormGroup;
   airCrons :string[] = ["20 */5 * * * *", "20 */10 * * * *", "20 */15 * * * *", "20 */30 * * * *"];
   basicCrons :string[] = ["0 */5 * * * *", "0 */10 * * * *", "0 */15 * * * *", "0 */30 * * * *"];
 
-  constructor(private formBuilder: FormBuilder, private settingsService : SettingsService, private loginService: LoginService) { }
+  constructor(private formBuilder: FormBuilder,
+              private settingsService : SettingsService,
+              private statisticsService: StatisticsService,
+              private loginService: LoginService) { }
 
   ngOnInit(): void {
 
@@ -38,6 +45,9 @@ export class SettingsComponent implements OnInit {
         this.isAdmin = data;
       }
     });
+
+    this.statisticsService.getAirMeasurementsCount().subscribe(data => this.airCount = data);
+    this.statisticsService.getBasicMeasurementsCount().subscribe(data => this.basicCount = data);
   }
 
   private getCronFormGroup() {

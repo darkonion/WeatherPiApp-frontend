@@ -63,4 +63,28 @@ export class StatisticsService {
           return of(err);
         }));
   }
+
+  getAirMeasurementsCount(): Observable<number> {
+    return this.httpClient.get<AirMeasurement[]>(this.baseUrl + '/air/count', { headers:
+        new HttpHeaders().set('Authorization', this.token),
+    })
+      .pipe(
+        catchError((err) => {
+          console.log(err);
+          this.router.navigate(['/']);
+          return of(err);
+        }));
+  }
+
+  getBasicMeasurementsCount(): Observable<number> {
+    return this.httpClient.get<AirMeasurement[]>(this.baseUrl + '/basic/count', { headers:
+        new HttpHeaders().set('Authorization', this.token),
+    })
+      .pipe(
+        catchError((err) => {
+          console.log(err);
+          this.router.navigate(['/']);
+          return of(err);
+        }));
+  }
 }

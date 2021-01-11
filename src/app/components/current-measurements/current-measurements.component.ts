@@ -5,6 +5,7 @@ import {AirMeasurement} from "../../models/air-measurement";
 import {AirMeasurementService} from "../../services/air-measurement.service";
 import {Data} from 'angular-bootstrap-md/lib/free/utils/positioning/models';
 import {interval, Subscription} from 'rxjs';
+import {AirlyService} from "../../services/airly.service";
 
 @Component({
   selector: 'app-current-measurements',
@@ -19,18 +20,45 @@ export class CurrentMeasurementsComponent implements OnInit {
   measurementData: string = null;
   airMeasurement: AirMeasurement = new AirMeasurement();
   airMeasurementData: string = null;
+  airMeasurementAirly: AirMeasurement = new AirMeasurement();
+  alt: number = 52.143302;
+  lng: number = 21.033467;
+
+  color: string = "#00796b;"
 
   constructor(private basicMeasurementService: BasicMeasurementService,
-              private airMeasurementService: AirMeasurementService) { }
+              private airMeasurementService: AirMeasurementService,
+              private airlyService: AirlyService) { }
 
   ngOnInit(): void {
     this.getBasicMeasurement();
     this.getAirMeasurement();
+    this.getAirlyMeasurement();
 
     this.updateSubscription = interval(30000).subscribe(() => {
       this.getBasicMeasurement();
       this.getAirMeasurement();
     });
+  }
+
+  updateColor(pm25: number): void {
+    if (this.airMeasurement.pm25 > 75) {
+      this.color = "#991515";
+    } else if (this.airMeasurement.pm25 > 50) {
+      this.color = "#cb490e";
+    } else if (this.airMeasurement.pm25 > 25) {
+      this.color = "#b48705"
+    } else {
+      this.color = "#00796b";
+    }
+  }
+
+  getAirlyMeasurement() {
+    this.airlyService.getCurrentMeasurements(this.alt, this.lng).subscribe(data => {
+      this.airMeasurementAirly.pm1 = Math.round(data.current.values[0].value);
+      this.airMeasurementAirly.pm25 = Math.round(data.current.values[1].value);
+      this.airMeasurementAirly.pm10 = Math.round(data.current.values[2].value);
+    })
   }
 
   getBasicMeasurement() {
@@ -45,6 +73,7 @@ export class CurrentMeasurementsComponent implements OnInit {
     this.airMeasurementService.getAirMeasurement().subscribe(data => {
       console.log(`loading air measurement with id: ${data.id}`);
       this.airMeasurement = data;
+      this.updateColor(data.pm25);
       this.airMeasurementData = this.toDate(data).toLocaleString();
     });
   }

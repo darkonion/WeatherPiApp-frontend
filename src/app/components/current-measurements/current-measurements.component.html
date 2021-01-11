@@ -60,11 +60,11 @@
 
     <h3 class="text-center font-weight-bold mb-5">Air Quality</h3>
 
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center mt-3">
 
       <div class="col-md-6 col-lg-4 mb-4 text-center">
         <h4 class="h1 font-weight-normal mb-3">
-          <i class="fas fa-smog mr-2" style="color: #00796b;"></i>
+          <i class="fas fa-smog mr-2" style="color:{{color}}"></i>
           <span class="d-inline-block count-up">{{airMeasurement.pm1}}μg/m<sup>3</sup></span>
         </h4>
         <p class="font-weight-normal">PM1</p>
@@ -72,7 +72,7 @@
 
       <div class="col-md-6 col-lg-4 mb-4 text-center">
         <h4 class="h1 font-weight-normal mb-3">
-          <i class="fas fa-smog mr-2" style="color: #00796b;"></i>
+          <i class="fas fa-smog mr-2" style="color:{{color}}"></i>
           <span class="d-inline-block count1">{{airMeasurement.pm25}}μg/m<sup>3</sup></span>
           <p class="font-small mt-2">({{roundResult(airMeasurement.pm25/25*100)}}% of WHO limit)</p>
         </h4>
@@ -82,14 +82,22 @@
 
       <div class="col-md-6 col-lg-4 mb-4 text-center">
         <h4 class="h1 font-weight-normal mb-3">
-          <i class="fas fa-smog mr-2" style="color: #00796b;"></i>
+          <i class="fas fa-smog mr-2" style="color:{{color}}"></i>
           <span class="d-inline-block count2">{{airMeasurement.pm10}}μg/m<sup>3</sup></span>
         </h4>
         <p class="font-weight-normal">PM10</p>
       </div>
-      <span class="font-small"><small>Measured at: {{airMeasurementData}}</small></span>
+      <span class="font-small mb-2"><small>Measured at: {{airMeasurementData}}</small></span>
+      <br>
 
+    </div>
 
+    <div class="row justify-content-center mt-5 font-small">
+      <div class="row col-md-1 justify-content-md-center mb-2"><img src="assets/airly-1024.png" class="img-fluid" /></div><div class="w-100"></div>
+      <div class="col-4 text-center">PM1: {{airMeasurementAirly.pm1}}μg/m<sup>3</sup></div><div class="w-100"></div>
+      <div class="col-4 text-center">PM2.5: {{airMeasurementAirly.pm25}}μg/m<sup>3</sup></div><div class="w-100"></div>
+      <div class="col-4 text-center">PM10: {{airMeasurementAirly.pm10}}μg/m<sup>3</sup></div><div class="w-100"></div>
+      <p class="mt-1" style="color: #2a2a2a;">{{alt}}, {{lng}}</p>
     </div>
 
   </section>

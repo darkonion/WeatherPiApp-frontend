@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Cron} from "../../models/cron";
 import {LoginService} from "../../services/login.service";
 import {StatisticsService} from "../../services/statistics.service";
+import {SensorSettings} from "../../models/sensor-settings";
 
 @Component({
   selector: 'app-settings',
@@ -13,6 +14,7 @@ import {StatisticsService} from "../../services/statistics.service";
 export class SettingsComponent implements OnInit {
 
   public cron :Cron;
+  public sensorSettings :SensorSettings;
   private promise: Promise<unknown>;
 
   public basicCount: number = 0;
@@ -21,8 +23,11 @@ export class SettingsComponent implements OnInit {
   private isAdmin: boolean;
 
   cronFormGroup: FormGroup;
+  sensorSettingsFormGroup: FormGroup;
+
   airCrons :string[] = ["20 */5 * * * *", "20 */10 * * * *", "20 */15 * * * *", "20 */30 * * * *"];
   basicCrons :string[] = ["0 */5 * * * *", "0 */10 * * * *", "0 */15 * * * *", "0 */30 * * * *"];
+  tempSensors :string[] = ["W1", "BME280"]
 
   constructor(private formBuilder: FormBuilder,
               private settingsService : SettingsService,
@@ -33,11 +38,15 @@ export class SettingsComponent implements OnInit {
 
     this.promise = new Promise((resolve) => {
       this.settingsService.getCurrentCron().subscribe(data => {
-        this.cron = data, resolve(data);
+        this.cron = data;
       });
+      this.settingsService.getCurrentSensorSettings().subscribe(data => {
+        this.sensorSettings = data, resolve(data);
+      })
     });
     this.promise.then(() => {
       this.getCronFormGroup();
+      this.getSensorSettingsFormGroup();
     });
 
     this.loginService.checkRole().subscribe(data => {
@@ -58,6 +67,13 @@ export class SettingsComponent implements OnInit {
     })
   }
 
+  private getSensorSettingsFormGroup() {
+    this.sensorSettingsFormGroup = this.formBuilder.group({
+      id: new FormControl(1),
+      temperature: new FormControl(this.sensorSettings.temperature)
+    })
+  }
+
   submitNewCron(): void {
     let cron: Cron = new Cron();
     cron.set(
@@ -67,6 +83,15 @@ export class SettingsComponent implements OnInit {
     console.log("Persisting new cron: " + cron.toString());
 
     this.settingsService.updateCron(cron).subscribe(data => console.log('Response status %d', data.status));
+  }
+
+  submitNewTempSensor(): void {
+    let tempSensor: string = this.sensorSettingsFormGroup.get("temperature").value;
+
+    console.log("Persisting new tempSensor: " + tempSensor);
+
+    this.settingsService.updateTemperatureSensor(tempSensor)
+      .subscribe(data => console.log('Response status %d', data.status));
   }
 
   checkUser(): boolean {

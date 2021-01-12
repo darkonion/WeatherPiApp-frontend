@@ -5,6 +5,7 @@
   <div *ngIf="checkUser() && cronFormGroup">
       <div class="p-5 row" style="background-color: rgba(10,10,10,0.8); color: rgb(227,227,227);" >
         <div class="col-md-5">
+          <h4 class="mb-4">Time Intervals:</h4>
           <form [formGroup]="cronFormGroup">
             <div class="mb-5 font-small">
               <label>Basic Measurement Time Interval</label>
@@ -26,6 +27,22 @@
               <button (click)="submitNewCron()" class="btn btn-outline-light">Submit</button>
             </div>
           </form>
+
+          <h4 class="mb-4 mt-5">Sensors:</h4>
+          <form [formGroup]="sensorSettingsFormGroup">
+            <div class="mb-5 font-small">
+              <label>Temperature Sensor</label>
+              <select formControlName="temperature" class="custom-select">
+                <option *ngFor="let sensor of tempSensors" [ngValue]="sensor">
+                  {{sensor}}
+                </option>
+              </select>
+            </div>
+            <div class="mt-4">
+              <button (click)="submitNewTempSensor()" class="btn btn-outline-light">Submit</button>
+            </div>
+          </form>
+
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-4">

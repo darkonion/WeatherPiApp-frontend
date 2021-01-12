@@ -6,6 +6,7 @@ import {Observable, of} from "rxjs";
 import {BasicMeasurement} from "../models/basic-measurement";
 import {catchError} from "rxjs/operators";
 import {Cron} from "../models/cron";
+import {SensorSettings} from "../models/sensor-settings";
 
 @Injectable({
   providedIn: 'root'
@@ -35,4 +36,26 @@ export class SettingsService {
           return of(err);
         }));
   }
+
+  getCurrentSensorSettings(): Observable<SensorSettings> {
+    return this.httpClient.get<BasicMeasurement>(this.baseUrl + '/sensors', { withCredentials: true })
+      .pipe(
+        catchError((err) => {
+          console.log(err);
+          this.router.navigate(['/']);
+          return of(err);
+        }));
+  }
+
+  updateTemperatureSensor(sensor :string): Observable<HttpResponse<any>> {
+    return this.httpClient.put<number>(this.baseUrl + '/sensors/temp?s=' + sensor,  "",{ withCredentials: true, observe: 'response' })
+      .pipe(
+        catchError((err) => {
+          console.log(err);
+          this.router.navigate(['/']);
+          return of(err);
+        }));
+  }
+
+
 }

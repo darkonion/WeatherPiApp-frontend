@@ -117,7 +117,7 @@ export class TemperatureAnalysisComponent implements OnInit {
     const hour = measurement.date[3];
     const minute = measurement.date[4];
 
-    return new Date(Date.UTC(year, month - 1, day, hour - 1, minute));
+    return new Date(Date.UTC(year, month - 1, day, hour - 2, minute));
   }
 
   changePeriod(daysCount: number): void {

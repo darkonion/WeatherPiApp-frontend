@@ -1,0 +1,42 @@
+<div class="container mb-5">
+
+  <div class="my-5 text-center" style="background-color: rgba(10,10,10, .8); color: rgb(227,227,227);">
+
+    <h3 class="font-weight-bold text-center p-5">Home Weather Station - Lightning Strikes Monitoring</h3>
+
+  </div>
+
+  <!--Section: Content-->
+  <section class="p-5" style="background-color: rgba(10,10,10, .7); color: rgb(227,227,227);">
+
+    <h3 class="text-center font-weight-bold mb-5">Recent Lightning Strikes</h3>
+
+    <div class="row d-flex justify-content-center">
+
+      <div class="mb-4 text-center">
+        <p *ngIf="lightnings.length == 0" class="font-weight-normal">No recent lightnings during last day!</p>
+
+        <ul *ngFor="let lightning of lightnings" class="list-group list-group-flush">
+          <li class="list-group-item bg-transparent">
+            <i class="fas fa-bolt"></i>&nbsp;&nbsp;
+            {{lightning.date.toTimeString().split(" ")[0]}} &nbsp;-&nbsp;
+            Distance: {{lightning.distance}}km &nbsp; Energy: {{lightning.energy}} &nbsp;&nbsp;
+            <span *ngIf="last10Minutes(lightning.date)" class="badge bg-danger">New</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+  <!--Section: Content-->
+  <br>
+
+  <div class="container my-5">.</div>
+  <div class="container my-5">.</div>
+  <div class="container my-5">.</div>
+  <div class="container my-5">.</div>
+  <div class="container my-5">.</div>
+
+</div>
+
+
